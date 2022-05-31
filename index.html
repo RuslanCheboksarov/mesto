@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./pages/index.css">
+    <title>Mesto</title>
+</head>
+
+<body class="page">
+    <header class="header">
+        <img class="header__logo" src="./img/logo.svg" alt="Место Россия">
+    </header>
+    <main class="main">
+        <section class="profile">
+            <img class="profile__avatar" src="./img/avatar.png" alt="Аватар">
+            <div class="profile__info">
+                <div class="profile__container">
+                    <h1 class="profile__name">Жак-Ив Кусто</h1>
+                    <button type="button" class="profile__edit-button">
+
+                    </button>
+                </div>
+                <p class="profile__about">Исследователь окена</p>
+            </div>
+            <button type="submit" class="profile__add-button">
+
+            </button>
+        </section>
+        <section class="elements-container">
+            <ul class="elements">
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/one.jpg" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Карачаевск
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/two.png" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Карачаевск
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/three.png" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Карачаевск
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/four.png" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Карачаевск
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/five.png" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Карачаевск
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+                <li class="elements__card">
+                    <img class="elements__image" src="./img/six.png" alt="Карачаевск">
+                    <div class="elements__title-container">
+                        <h2 class="elements__title">
+                            Ергаки &hearts;
+                        </h2>
+                        <button type="submit" class="elements__like-button">
+
+                        </button>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    <footer class="footer">
+        <p class="footer__copyright">
+            © 2020 Mesto Russia
+        </p>
+    </footer>
+
+    <div class="popup">
+        <div class="popup__container">
+            <form action="submit" class="popup__form">
+                <h3 class="popup__title">
+                    Редактировать профиль
+                </h3>
+                <input type="text" name="username" id="username_input" class="popup__input popup__input_user-name">
+                <input type="text" name="userabout" id="userabout_input" class="popup__input popup__input_user-about">
+                <button type="submit" class="popup__button">
+                    Сохранить
+                </button>
+            </form>
+            <button type="button" class="popup__close-button">
+            </button>
+        </div>
+    </div>
+
+    <script src="./js/index.js">
+
+    </script>
+
+</body>
+
+</html>
