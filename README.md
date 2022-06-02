@@ -1,5 +1,7 @@
 # Проект: Место
 
+* [Ссылка на проект](https://ruslancheboksarov.github.io/mesto/)
+
 ### Обзор
 
 * Figma

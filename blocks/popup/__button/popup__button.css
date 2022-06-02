@@ -2,7 +2,7 @@
     font-family: 'Inter', Arial, Helvetica, sans-serif;
     font-size: 18px;
     font-weight: 400;
-    line-height: 21.78px;
+    line-height: 22px;
     background-color: #000;
     color: #fff;
     border: none;
@@ -23,5 +23,8 @@
     .popup__button {
       font-size: 14px;
       line-height: 17px;
+      min-height: 46px;
+      margin-top: 45px;
+      margin-bottom: 25px;
     }
   }

@@ -25,19 +25,19 @@
                 </div>
                 <p class="profile__about">Исследователь окена</p>
             </div>
-            <button type="submit" class="profile__add-button">
+            <button type="button" class="profile__add-button">
 
             </button>
         </section>
-        <section class="elements-container">
-            <ul class="elements">
+        <section class="elements">
+            <ul class="elements__container">
                 <li class="elements__card">
                     <img class="elements__image" src="./img/one.png" alt="Карачаевск">
                     <div class="elements__title-container">
                         <h2 class="elements__title">
                             Карачаевск
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -48,7 +48,7 @@
                         <h2 class="elements__title">
                             Карачаевск
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -59,7 +59,7 @@
                         <h2 class="elements__title">
                             Карачаевск
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -70,7 +70,7 @@
                         <h2 class="elements__title">
                             Карачаевск
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -81,7 +81,7 @@
                         <h2 class="elements__title">
                             Карачаевск
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -92,7 +92,7 @@
                         <h2 class="elements__title">
                             Ергаки &hearts;
                         </h2>
-                        <button type="submit" class="elements__like-button">
+                        <button type="button" class="elements__like-button">
 
                         </button>
                     </div>
@@ -108,12 +108,12 @@
 
     <div class="popup">
         <div class="popup__container">
-            <form action="submit" class="popup__form">
+            <form name="popupEditProfile" action="submit" class="popup__form">
                 <h3 class="popup__title">
                     Редактировать профиль
                 </h3>
-                <input type="text" name="username" id="username_input" class="popup__input popup__input_user-name">
-                <input type="text" name="userabout" id="userabout_input" class="popup__input popup__input_user-about">
+                <input type="text" name="username" id="username_input" class="popup__input popup__input_data_name">
+                <input type="text" name="userabout" id="userabout_input" class="popup__input popup__input_data_about">
                 <button type="submit" class="popup__button">
                     Сохранить
                 </button>
@@ -123,7 +123,7 @@
         </div>
     </div>
 
-    <script src="./js/index.js">
+    <script src="./scripts/index.js">
 
     </script>
 

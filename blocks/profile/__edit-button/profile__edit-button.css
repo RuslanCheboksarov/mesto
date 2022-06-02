@@ -5,11 +5,12 @@
     background-size: contain;
     border: none;
     display: inline-block;
-    height: 24px;
     outline: none;
     padding: 0;
-    transition: .2s;
+    margin: 0 auto;
+    height: 24px;
     width: 24px;
+    transition: .2s;
 }
 
 .profile__edit-button:hover{
