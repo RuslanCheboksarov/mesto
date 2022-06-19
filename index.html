@@ -13,7 +13,7 @@
     <header class="header">
         <img class="header__logo" src="./img/logo.svg" alt="Место Россия">
     </header>
-    <main class="main">
+    <main class="content">
         <section class="profile">
             <img class="profile__avatar" src="./img/avatar.png" alt="Аватар">
             <div class="profile__info">
@@ -30,74 +30,7 @@
             </button>
         </section>
         <section class="elements">
-            <ul class="elements__container">
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/one.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Карачаевск
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/two.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Карачаевск
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/three.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Карачаевск
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/four.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Карачаевск
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/five.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Карачаевск
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-                <li class="elements__card">
-                    <img class="elements__image" src="./img/six.png" alt="Карачаевск">
-                    <div class="elements__title-container">
-                        <h2 class="elements__title">
-                            Ергаки &hearts;
-                        </h2>
-                        <button type="button" class="elements__like-button">
-
-                        </button>
-                    </div>
-                </li>
-            </ul>
+            <!-- Карточки здесь -->
         </section>
     </main>
     <footer class="footer">
@@ -106,26 +39,53 @@
         </p>
     </footer>
 
-    <div class="popup">
+    <div class="popup" id="popup-profile">
         <div class="popup__container">
             <form name="popupEditProfile" action="submit" class="popup__form">
                 <h3 class="popup__title">
                     Редактировать профиль
                 </h3>
-                <input type="text" name="username" id="username_input" class="popup__input popup__input_data_name">
-                <input type="text" name="userabout" id="userabout_input" class="popup__input popup__input_data_about">
+                <input type="text" name="popup__username" id="username_input" class="popup__input popup__input_data_name">
+                <input type="text" name="popup__userabout" id="userabout_input" class="popup__input popup__input_data_about">
                 <button type="submit" class="popup__button">
                     Сохранить
                 </button>
             </form>
-            <button type="button" class="popup__close-button">
+            <button type="button" class="popup__close-button" name="popup__close-button-profile">
             </button>
         </div>
     </div>
 
-    <script src="./scripts/index.js">
+    <div class="popup" id="popup-card">
+        <div class="popup__container">
+            <form name="popupAddCard" action="submit" class="popup__form">
+                <h3 class="popup__title">
+                    Новое место
+                </h3>
+                <input type="text" name="popup__cardname" id="username_input" class="popup__input popup__input_data_name" placeholder="Название">
+                <input type="text" name="popup__cardlink" id="userabout_input" class="popup__input popup__input_data_about" placeholder="Ссылка на картинку">
+                <button type="submit" class="popup__button">
+                    Сохранить
+                </button>
+            </form>
+            <button type="button" class="popup__close-button" name="popup__close-button-addcard">
+            </button>
+        </div>
+    </div>
 
-    </script>
+    <template id="card">
+        <div class="photo-grid__item">
+          <img class="photo-grid__image" src="#" alt="Иллюстрация">
+          <!-- <button class="photo-grid__delete" type="button"></button> -->
+          <div class="photo-grid__bar">
+            <h2 class="photo-grid__title"></h2>
+            <button class="photo-grid__like" type="button"></button>
+          </div>
+        </div>
+      </template>
+
+    <script src="./scripts/initial-cards.js"></script>
+    <script src="./scripts/index.js"></script>
 
 </body>
 

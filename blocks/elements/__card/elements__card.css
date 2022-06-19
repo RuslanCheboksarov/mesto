@@ -1,9 +1,11 @@
-.elements__card{
+.photo-grid__item{
     background-color: #fff;
     border-radius: 10px;
     display: grid;
     grid-template-rows: 282px 1fr;
     max-width: 100%;
+    width: 282px;
+    height: 361px;
     overflow: hidden;
     position: relative;
 }
