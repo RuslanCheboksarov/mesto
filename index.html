@@ -62,8 +62,8 @@
                 <h3 class="popup__title">
                     Новое место
                 </h3>
-                <input type="text" name="popup__cardname" id="username_input" class="popup__input popup__input_data_name" placeholder="Название">
-                <input type="text" name="popup__cardlink" id="userabout_input" class="popup__input popup__input_data_about" placeholder="Ссылка на картинку">
+                <input type="text" name="popup__cardname" class="popup__input popup__input_data_name" placeholder="Название">
+                <input type="text" name="popup__cardlink" class="popup__input popup__input_data_about" placeholder="Ссылка на картинку">
                 <button type="submit" class="popup__button">
                     Создать
                 </button>
@@ -74,17 +74,17 @@
     </div>
 
     <div class="popup popup_type_image">
-        <div class="popup-pic__container">
-          <img class="popup-pic__image" src="#" alt="Иллюстрация">
-          <p class="popup-pic__title"></p>
-          <button class="popup-pic__close-button" type="button" name="popup__close-button-image"></button>
+        <div class="popup__container-image">
+          <img class="popup__image" src="#" alt="Иллюстрация">
+          <p class="popup__caption"></p>
+          <button class="popup__close-button" type="button" name="popup__close-button-image"></button>
         </div>
       </div>
 
     <template id="card">
         <div class="elements__card">
           <img class="elements__image" src="#" alt="Иллюстрация">
-          <!-- <button class="photo-grid__delete" type="button"></button> -->
+          <button class="elements__delete" type="button"></button>
           <div class="elements__title-container">
             <h2 class="elements__title"></h2>
             <button class="elements__like-button" type="button"></button>

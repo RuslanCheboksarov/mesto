@@ -2,7 +2,7 @@
     display: flex;
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0.2s linear, opacity 0.2s linear;
+    transition: visibility 0.2s linear, opacity 0.5s linear;
     position: fixed;
     align-items: center;
     justify-content: center;
@@ -14,4 +14,5 @@
     margin: 0;
     padding: 0;
     color: #000;
+    z-index: 10;
 }
