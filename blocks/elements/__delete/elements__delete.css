@@ -1,0 +1,26 @@
+.elements__delete {
+    width: 18px;
+    height: 19.3px;
+  
+    margin: 0;
+    padding: 0;
+  
+    background-color: transparent;
+    background-image: url(../../../img/Trash.svg);
+    background-size: cover;
+    border: none;
+  
+    transition: 0.7s;
+  
+    position: absolute;
+    right: 20px;
+    top: 20px;
+  
+    z-index: 2;
+  
+    cursor: pointer;
+  }
+  
+  .photo-grid__delete:hover {
+    opacity: 0.6;
+  }

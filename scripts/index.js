@@ -21,9 +21,8 @@ const cardName = document.querySelector('.elements__title');
 const cardLink = document.querySelector('.elements__image');
 
 const popupPic = document.querySelector('.popup_type_image');
-const popupPicImage = document.querySelector('.popup-pic__image');
-const popupPicTitle = document.querySelector('.popup-pic__title');
-
+const popupPicImage = document.querySelector('.popup__image');
+const popupPicTitle = document.querySelector('.popup__caption');
 const popupPicCloseButton = popupPic.querySelector('[name="popup__close-button-image"]');
 
 const cards = document.querySelector('.elements');
@@ -37,8 +36,12 @@ function createCard(picName, picLink) {
     newCardImg.alt = picName;
     newCard.querySelector('.elements__title').textContent = picName;
 
-    newCard.querySelector('.elements__like-button').addEventListener('click', function(evt){
+    newCard.querySelector('.elements__like-button').addEventListener('click', function (evt) {
         evt.target.classList.toggle('elements__like-button_active');
+    });
+
+    newCard.querySelector('.elements__delete').addEventListener('click', function (evt) {
+        evt.target.closest('.elements__card').remove();
     });
 
     newCard.querySelector('.elements__image').addEventListener('click', function () {
@@ -46,7 +49,7 @@ function createCard(picName, picLink) {
         popupPicImage.alt = picName;
         popupPicTitle.textContent = picName;
         popupOnClick(popupPic);
-      });
+    });
 
     return newCard;
 }
@@ -79,7 +82,7 @@ addCardButton.addEventListener('click', function () {
 
 popupPicCloseButton.addEventListener('click', function () {
     popupOnClose(popupPic);
-  });
+});
 
 function popupOnClose(pickedPopup) {
     pickedPopup.classList.remove('popup_opened');
@@ -101,6 +104,24 @@ popupCardClose.addEventListener('click', function () {
     popupOnClose(popupCard);
 });
 
+popupProfile.addEventListener('click', function (e){
+    if (e.target === e.currentTarget){
+        popupOnClose(popupProfile);
+    }
+});
+
+popupCard.addEventListener('click', function (e){
+    if (e.target === e.currentTarget){
+        popupOnClose(popupCard);
+    }
+});
+
+popupPic.addEventListener('click', function (e) {
+    if (e.target === e.currentTarget) {
+        popupOnClose(popupPic);
+    }
+});
+
 function formSubmitHandler(evt) {
     evt.preventDefault();
     profName.textContent = popupProfileNameInput.value;
@@ -115,9 +136,9 @@ function formSubmitHandlerCard(evt) {
 
     popupNameInputCard.value = "";
     popupLinkInputCard.value = "";
-  
+
     popupOnClose(popupCard);
-  }
+}
 
 formProfileEdit.addEventListener('submit', formSubmitHandler);
 formCard.addEventListener('submit', formSubmitHandlerCard);
