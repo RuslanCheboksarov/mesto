@@ -65,7 +65,7 @@
                 <input type="text" name="popup__cardname" id="username_input" class="popup__input popup__input_data_name" placeholder="Название">
                 <input type="text" name="popup__cardlink" id="userabout_input" class="popup__input popup__input_data_about" placeholder="Ссылка на картинку">
                 <button type="submit" class="popup__button">
-                    Сохранить
+                    Создать
                 </button>
             </form>
             <button type="button" class="popup__close-button" name="popup__close-button-addcard">
@@ -73,13 +73,21 @@
         </div>
     </div>
 
+    <div class="popup-pic">
+        <div class="popup-pic__container">
+          <img class="popup-pic__image" src="#" alt="Иллюстрация">
+          <p class="popup-pic__title"></p>
+          <button class="popup-pic__close-button" type="button" name="popup__close-button-image"></button>
+        </div>
+      </div>
+
     <template id="card">
-        <div class="photo-grid__item">
-          <img class="photo-grid__image" src="#" alt="Иллюстрация">
+        <div class="elements__card">
+          <img class="elements__image" src="#" alt="Иллюстрация">
           <!-- <button class="photo-grid__delete" type="button"></button> -->
-          <div class="photo-grid__bar">
-            <h2 class="photo-grid__title"></h2>
-            <button class="photo-grid__like" type="button"></button>
+          <div class="elements__title-container">
+            <h2 class="elements__title"></h2>
+            <button class="elements__like-button" type="button"></button>
           </div>
         </div>
       </template>

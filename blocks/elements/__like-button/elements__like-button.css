@@ -1,4 +1,4 @@
-.photo-grid__like{
+.elements__like-button{
     background-color: transparent;
     background-image: url(../../../img/likebutton.svg);
     background-repeat: no-repeat;
@@ -9,7 +9,7 @@
     width: 22px;
 }
 
-.photo-grid__like:hover{
+.elements__like-button:hover{
     opacity: .5;
     cursor: pointer;
 }
