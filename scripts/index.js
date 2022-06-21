@@ -40,7 +40,7 @@ function createCard(picName, picLink) {
         evt.target.classList.toggle('elements__like-button_active');
     });
 
-    newCard.querySelector('.elements__delete').addEventListener('click', function (evt) {
+    newCard.querySelector('.elements__delete-button').addEventListener('click', function (evt) {
         evt.target.closest('.elements__card').remove();
     });
 
