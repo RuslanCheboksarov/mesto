@@ -6,6 +6,7 @@
     white-space: nowrap;
     font-size: 18px;
     font-weight: 400;
+    max-width: 294px;
 }
 
 @media screen and (max-width: 821px) {
