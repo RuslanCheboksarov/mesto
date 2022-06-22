@@ -64,15 +64,15 @@ function clickPopup(pickedPopup) {
 }
 
 popupProfileEdit.addEventListener('click', function () {
+    popupProfileNameInput.value = profName.textContent;
+    popupProfileAboutInput.value = profAbout.textContent;
     clickPopup(popupProfile);
-        popupProfileNameInput.value = profName.textContent;
-        popupProfileAboutInput.value = profAbout.textContent;
 });
 
 addCardButton.addEventListener('click', function () {
-    clickPopup(popupCard);
     popupNameInputCard.value = "";
     popupLinkInputCard.value = "";
+    clickPopup(popupCard);
 });
 
 popupPicCloseButton.addEventListener('click', function () {
@@ -81,14 +81,6 @@ popupPicCloseButton.addEventListener('click', function () {
 
 function closePopup(pickedPopup) {
     pickedPopup.classList.remove('popup_opened');
-    if (pickedPopup === popupProfile) {
-        popupProfileNameInput.value = profName.textContent;
-        popupProfileAboutInput.value = profAbout.textContent;
-    }
-    else if (pickedPopup === popupCard) {
-        popupNameInputCard.value = "";
-        popupLinkInputCard.value = "";
-    }
 }
 
 popupProfileClose.addEventListener('click', function () {
