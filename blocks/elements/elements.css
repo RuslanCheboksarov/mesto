@@ -1,7 +1,5 @@
 .elements{
     max-width: 880px;
-    /* margin: 0; */
-    width: 100%;
     padding: 0 0 66px 0;
     display: flex;
     flex-direction: row;
@@ -10,3 +8,9 @@
     gap: 17px;
     row-gap: 20px;
 }
+
+@media screen and (max-width: 881px) {
+    .elements {
+      padding-bottom: 48px;
+    }
+  }
