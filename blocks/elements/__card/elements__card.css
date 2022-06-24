@@ -1,15 +1,8 @@
 .elements__card{
-    background-color: #fff;
-    border-radius: 10px;
-    display: grid;
-    grid-template-rows: 282px 1fr;
-    max-width: 100%;
     width: 282px;
     height: 361px;
+    border-radius: 10px;
     overflow: hidden;
+    font-size: 0;
     position: relative;
-}
-
-.elements__card:hover{
-    cursor: pointer;
 }
