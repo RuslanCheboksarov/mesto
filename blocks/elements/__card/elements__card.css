@@ -1,8 +1,8 @@
-.elements__card{
-    width: 282px;
-    height: 361px;
-    border-radius: 10px;
-    overflow: hidden;
-    font-size: 0;
-    position: relative;
+.elements__card {
+  width: 282px;
+  height: 361px;
+  border-radius: 10px;
+  overflow: hidden;
+  font-size: 0;
+  position: relative;
 }

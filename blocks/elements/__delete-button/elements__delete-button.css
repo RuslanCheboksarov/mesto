@@ -1,5 +1,5 @@
-.elements__delete-button{
-    position: absolute;
+.elements__delete-button {
+  position: absolute;
   top: 20px;
   right: 20px;
   background: url(../../../img/deletebutton.svg);
