@@ -1,17 +1,17 @@
-.profile__about{
-    color: #ffffff;
-    margin: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    font-size: 18px;
-    font-weight: 400;
-    max-width: 294px;
+.profile__about {
+  color: #ffffff;
+  margin: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 18px;
+  font-weight: 400;
+  max-width: 294px;
 }
 
 @media screen and (max-width: 821px) {
-    .profile__about{
-        font-size: 14px;
-        padding-bottom: 36px;
-    }
+  .profile__about {
+    font-size: 14px;
+    padding-bottom: 36px;
+  }
 }
