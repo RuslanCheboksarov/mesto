@@ -1,14 +1,15 @@
-.profile__info {
-  margin-right: auto;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
+.profile__info{
+    display: flex;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+    width: 100%;
 }
 
-@media screen and (max-width: 821px) {
-  .profile__info {
-    margin-right: 0;
-    max-width: 100%;
-    text-align: center;
-  }
+@media screen and (max-width: 1104px) {
+    .profile__info {
+        width: 100%;
+        flex-direction: column;
+        padding: 0 0 36px 0;
+    }
 }
