@@ -63,7 +63,7 @@ function createCard(picName, picLink) {
       popupPicImage.src = picLink;
       popupPicImage.alt = picName;
       popupPicTitle.textContent = picName;
-      clickPopup(popupPic);
+      openPopup(popupPic);
     });
 
   return newCard;
@@ -73,29 +73,37 @@ initialCards.forEach(function (item) {
   cards.append(createCard(item.name, item.link));
 });
 
-function clickPopup(pickedPopup) {
-  pickedPopup.classList.add("popup_opened");
+function openPopup(anyPopup) {
+  if (anyPopup.querySelector('.popup__form')) {
+    updateSaveButtonStatus(anyPopup);
+  };
+  anyPopup.classList.add('popup_opened');
+  document.addEventListener('keydown', closePopupEsc);
+}
+
+function closePopup(anyPopup) {
+  anyPopup.classList.remove('popup_opened');
+  if (anyPopup.querySelector('.popup__form')) {
+    anyPopup.querySelector('.popup__form').reset();
+  };
+  document.removeEventListener('keydown', closePopupEsc);
 }
 
 popupProfileEdit.addEventListener("click", function () {
   popupProfileNameInput.value = profName.textContent;
   popupProfileAboutInput.value = profAbout.textContent;
-  clickPopup(popupProfile);
+  openPopup(popupProfile);
 });
 
 addCardButton.addEventListener("click", function () {
   popupNameInputCard.value = "";
   popupLinkInputCard.value = "";
-  clickPopup(popupCard);
+  openPopup(popupCard);
 });
 
 popupPicCloseButton.addEventListener("click", function () {
   closePopup(popupPic);
 });
-
-function closePopup(pickedPopup) {
-  pickedPopup.classList.remove("popup_opened");
-}
 
 popupProfileClose.addEventListener("click", function () {
   closePopup(popupProfile);
@@ -142,3 +150,33 @@ function submitHandlerCard(evt) {
 
 formProfileEdit.addEventListener("submit", submitHandlerProfile);
 formCard.addEventListener("submit", submitHandlerCard);
+
+const setEventListenersPopup = () => {
+  const popupList = Array.from(document.querySelectorAll('.popup'));
+
+  // Обойдём все элементы полученной коллекции
+  popupList.forEach((popupElement) => {
+    // Обработчик клика кнопки закрытия попапа
+    popupElement.querySelector('.popup__close-button').addEventListener('click', function () {
+      closePopup(document.querySelector('.popup_opened'));
+    });
+  });
+}
+
+// Вызовем функцию
+setEventListenersPopup();
+
+// Закрытие попапа по нажатию Esc
+const closePopupEsc = (e) => {
+  anyPopup = document.querySelector('.popup_opened');
+  if (e.code === "Escape") {
+    closePopup(anyPopup);
+  }
+}
+
+// Обновление статуса кнопки
+const updateSaveButtonStatus = (anyPopup) => {
+  const buttonElement = anyPopup.querySelector(validationConfig.submitButtonSelector);
+  buttonElement.setAttribute('disabled', true);
+  buttonElement.classList.add(validationConfig.inactiveButtonClass);
+}
