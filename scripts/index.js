@@ -8,6 +8,7 @@ const jobInput = formEditProfile.querySelector('.popup__text_type_description');
 const newName = document.querySelector('.profile__title');
 const newJob = document.querySelector('.profile__subtitle');
 const popupProfile = document.querySelector('.popup_edit-profile');
+const buttonEditProfile = document.querySelector('.popup__submit-button');
 const popupCloseButtonProfile = popupProfile.querySelector('.popup__close-button');
 
 
@@ -39,14 +40,14 @@ function closePopup(popup) {
     popup.classList.remove('popup_opened');
 }
 
-function handleEditProfileForm() {
-    formEditProfile.reset();
+function handleEditProfileForm(evt) {
+    evt.preventDefault();
     nameInput.value = newName.textContent;
     jobInput.value = newJob.textContent;
 
     openPopup(popupProfile);
-
-    enableButton(formEditProfile.submit, config);
+    enableButton(formEditProfile.submit, config); 
+    console.log(formEditProfile.submit);
 }
 
 buttonOpenPopupProfile.addEventListener('click', handleEditProfileForm);
@@ -71,9 +72,11 @@ const popupPhoto = document.querySelector('.popup_photo');
 const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
 buttonAddOpen.addEventListener('click', function () {
-    formAddCard.reset();
+    formInputName.value = "";
+    formInputLink.value = "";
     openPopup(popupPlace);
     disabledButton(formAddCard.submit, config); 
+    console.log(formAddCard.submit);
 })
 
 popupPlaceCloseButton.addEventListener('click', function () {
