@@ -21,9 +21,8 @@ function closePopupByEsc(evt) {
 }
 
 function closePopupByOverlay(evt) {
-    const popup = document.querySelector('.popup_opened');
     if (evt.target === evt.currentTarget) {
-        closePopup(popup);
+        closePopup(evt.target);
     }
 }
 
@@ -36,7 +35,7 @@ function openPopup(popup) {
 
 function closePopup(popup) {
     document.removeEventListener('keydown', closePopupByEsc);
-    popup.removeEventListener('mousedown', closePopupByOverlay);
+    document.removeEventListener('mousedown', closePopupByOverlay);
     popup.classList.remove('popup_opened');
 }
 
@@ -47,7 +46,6 @@ function handleEditProfileForm(evt) {
 
     openPopup(popupProfile);
     enableButton(formEditProfile.submit, config); 
-    console.log(formEditProfile.submit);
 }
 
 buttonOpenPopupProfile.addEventListener('click', handleEditProfileForm);
@@ -72,16 +70,15 @@ const popupPhoto = document.querySelector('.popup_photo');
 const buttonClosePhoto = popupPhoto.querySelector('.popup__close-button');
 
 buttonAddOpen.addEventListener('click', function () {
-    formInputName.value = "";
-    formInputLink.value = "";
+    // formInputName.value = "";
+    // formInputLink.value = "";
+    formAddCard.reset();
     openPopup(popupPlace);
     disabledButton(formAddCard.submit, config); 
-    console.log(formAddCard.submit);
 })
 
 popupPlaceCloseButton.addEventListener('click', function () {
     closePopup(popupPlace);
-
 })
 
 buttonClosePhoto.addEventListener('click', function () {
@@ -115,7 +112,6 @@ function createCard(name, link) {
         popupPhotoImg.src = link;
         popupPhotoImg.alt = name;
         popupPhotoTitle.textContent = name;
-
         openPopup(popupPhoto);
     });
 
