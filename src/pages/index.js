@@ -3,6 +3,7 @@ import { FormValidator } from '../components/FormValidator.js';
 import { Card } from '../components/Card.js';
 import { initialCards } from '../utils/constants.js';
 import { configSelector } from '../utils/constants.js';
+import { profileUser } from '../utils/constants.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import UserInfo from '../components/UserInfo.js';
@@ -17,15 +18,6 @@ const formAddProfile = document.querySelector('.popup__form_profile');
 // Переменные для нового места и фото
 const buttonAddOpen = document.querySelector('.profile__add-button');
 const formAddCard = document.querySelector('.popup__form_place');
-
-
-// Объект с селекторами-ключами : имя пользователя и информация о пользователе
-
-const profileUser = {
-  selectorUserName: '.profile__title',
-  selectorUserJob: '.profile__subtitle',
-}
-
 
 // Валидация формы профиля
 const formProfile = new FormValidator(configSelector, formAddProfile);

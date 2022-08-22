@@ -33,3 +33,10 @@ export const configSelector = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 };
+
+// Объект с селекторами-ключами : имя пользователя и информация о пользователе
+
+export const profileUser = {
+  selectorUserName: '.profile__title',
+  selectorUserJob: '.profile__subtitle',
+}
