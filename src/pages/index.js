@@ -1,157 +1,249 @@
-import '../pages/index.css';
-import { FormValidator } from '../components/FormValidator.js';
-import { Card } from '../components/Card.js';
-import { initialCards } from '../utils/constants.js';
-import { configSelector } from '../utils/constants.js';
-import { profileUser } from '../utils/constants.js';
-import Section from '../components/Section.js';
-import PopupWithImage from '../components/PopupWithImage.js';
-import UserInfo from '../components/UserInfo.js';
-import PopupWithForm from '../components/PopupWithForm.js';
+import "./index.css";
 
-// Переменные для изменения профиля пользователя
-const buttonOpenPopupProfile = document.querySelector('.profile__edit-button');
-const formEditProfile = document.querySelector('.popup__content');
-const nameInput = formEditProfile.querySelector('.popup__text_type_name');
-const jobInput = formEditProfile.querySelector('.popup__text_type_job');
-const formAddProfile = document.querySelector('.popup__form_profile');
-// Переменные для нового места и фото
-const buttonAddOpen = document.querySelector('.profile__add-button');
-const formAddCard = document.querySelector('.popup__form_place');
+import {
+  buttonEdit,
+  buttonAdd,
+  popupProfile,
+  popupPlace,
+  popupCard,
+  popupAvatar,
+  popupCloseButtonProfile,
+  popupCloseButtonPlace,
+  popupCloseButtonImage,
+  popupCloseButtonAvatar,
+  popupImg,
+  popupTitle,
+  profileName,
+  profileInfo,
+  nameInput,
+  jobInput,
+  formAddName,
+  formAddAvatar,
+  formAddCards,
+  formInputName,
+  formInputImage,
+  cardsContainer,
+  buttonEditAvatar,
+  profileAvatar,
+  popupDel,
+  popupCloseButtonConfirm,
+  buttonDel,
+  buttonDeleteConfirm,
+} from "../utils/constants.js";
 
-// Валидация формы профиля
-const formProfile = new FormValidator(configSelector, formAddProfile);
-formProfile.enableValidation();
+import Card from "../components/Card.js";
+import Section from "../components/Section.js";
+import FormValidator from "../components/FormValidator.js";
+import config from "../utils/config.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import PopupWithForm from "../components/PopupWithForm.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+import Api from "../components/Api.js";
 
-// Валидация формы карточки
-const formCard = new FormValidator(configSelector, formAddCard);
-formCard.enableValidation();
+const api = new Api({
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-48",
+  headers: {
+    authorization: "2416fc82-bfbc-4b78-a4fd-442dace64f7e",
+    "Content-Type": "application/json",
+  },
+});
 
+//добавляем валидацию формам
+const formValidatorAddName = new FormValidator(config, formAddName);
+formValidatorAddName.enableValidation();
 
-// Функция создания карточки (как новой из формы, так и из массива)
-function createCard(name, link) {
+const formValidatorAddCards = new FormValidator(config, formAddCards);
+formValidatorAddCards.enableValidation();
 
-  // Объявляем создание новой карточки из Класса
-  const card = new Card(name, link, '.item__template', handleCardClick);
+const formValidatorAddAvatar = new FormValidator(config, formAddAvatar);
+formValidatorAddAvatar.enableValidation();
 
-  // Задаем элемент "карта" и вызываем метод генерация у новой карточки
+const userInfoData = new UserInfo(profileName, profileInfo, profileAvatar);
+
+const popupConfirm = new PopupWithConfirmation(
+  popupDel,
+  deleteFormCard,
+  popupCloseButtonConfirm
+);
+
+const popupImage = new PopupWithImage(
+  popupCard,
+  popupCloseButtonImage,
+  popupImg,
+  popupTitle
+);
+
+popupImage.setEventListeners();
+popupConfirm.setEventListeners();
+
+const popupFormProfile = new PopupWithForm(
+  popupProfile,
+  handleProfileFormSubmit,
+  popupCloseButtonProfile
+);
+
+const popupFormCard = new PopupWithForm(
+  popupPlace,
+  handleCardsSubmit,
+  popupCloseButtonPlace
+);
+
+const popupFormAvatar = new PopupWithForm(
+  popupAvatar,
+  handleAvatarFormSubmit,
+  popupCloseButtonAvatar
+);
+
+let currentUserId = 0;
+
+const createCard = (data) => {
+  data.currentUserId = currentUserId;
+
+  const card = new Card(data, "#card-template", {
+    imageClick: handleCardClick,
+    remove: handleOpenConfirmPopup,
+    like: handleLikeClick,
+    removeLike: handleLikeRemove,
+  });
+
   const cardElement = card.generateCard();
-
-  // Возвращаем созданую карточку
   return cardElement;
 };
 
-// Загружаем карточки на страницу из массива исходных данных через создание новой секции из класса Секция
-const cardList = new Section({
-  items: initialCards,
-  renderer: (item) => {
-    cardList.addItem(createCard(item.name, item.link));
+const cardsList = new Section(
+  {
+    renderer: (item) => {
+      cardsList.addItem(createCard(item));
+    },
   },
-}, '.elements__items');
+  cardsContainer
+);
 
-
-// Функция добавления новой карточки на страницу
-function addCard(cardElement) {
-
-  cardList.addItem(cardElement);
-
+function handleLikeClick(currentData, likeCallback) {
+  api
+    .likeCard(currentData._id)
+    .then((updatedData) => {
+      likeCallback(updatedData.likes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
 }
 
-// Отрисовываем карточки из массива
-cardList.renderItems();
+function handleLikeRemove(currentData, likeCallback) {
+  api
+    .likeRemove(currentData._id)
+    .then((updatedData) => {
+      likeCallback(updatedData.likes);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
 
-// ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА С БОЛЬШОЙ КАРТИНКОЙ ПРИ КЛИКЕ НА КАРТОЧКУ 
+function handleOpenConfirmPopup(currentData, removeCallback) {
+  popupConfirm.open(currentData, removeCallback);
+}
 
-// Создание попапа из класса PWI
-const popupImage = new PopupWithImage('.popup_photo');
-popupImage.setEventListeners();
+function deleteFormCard(currentData, removeCallback) {
+  popupConfirm.addSaving();
 
-// Функция открытия попапа по клику по карточке => PopupWithImage
-function handleCardClick(name, link) {
+  api
+    .deleteCard(currentData._id)
+    .then(() => {
+      removeCallback();
+      popupConfirm.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => popupConfirm.deleteSaving("Да"));
+}
 
-  popupImage.open(name, link);
+function handleCardsSubmit(data) {
+  popupFormCard.addSaving();
+  api
+    .setNewCard({ name: data.newname, link: data.link })
+    .then((res) => {
+      cardsList.addNewItem(
+        createCard(res, "#card-template", {
+          imageClick: handleCardClick,
+          remove: handleOpenConfirmPopup,
+          like: handleLikeClick,
+          removeLike: handleLikeRemove,
+        })
+      );
+      popupFormCard.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => popupFormCard.deleteSaving("Создать"));
+}
 
-};
+function handleProfileFormSubmit({ name, job }) {
+  popupFormProfile.addSaving();
+  api
+    .setUserInfo({ name: name, about: job })
+    .then((res) => {
+      userInfoData.setUserInfo({ name: res.name, about: res.about });
+      popupFormProfile.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => popupFormProfile.deleteSaving("Сохранить"));
+}
 
-// ФУНКЦИОНАЛ РАБОТЫ С ПРОФИЛЕМ ПОЛЬЗОВАТЕЛЯ
+function handleAvatarFormSubmit({ avatar }) {
+  popupFormAvatar.addSaving();
 
-// Создаем новый элемент класса UserInfo
-const newUser = new UserInfo(profileUser);
+  api
+    .setProfileAvatar({ avatar: avatar })
+    .then((res) => {
+      userInfoData.setUserAvatar({ avatar: res.avatar });
+      popupFormAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err);
+    })
+    .finally(() => popupFormAvatar.deleteSaving("Сохранить"));
+}
 
-// Слушатель действий. Попап открыть, значения в поле формы = исходному имени и работе
-buttonOpenPopupProfile.addEventListener('click', () => {
+function handleCardClick({ name, link }) {
+  popupImage.open({ data: { name, link } });
+}
 
-  // Открытие попапа Профиля
-  popupEditProfile.open();
+// попап редактирования профиля
+buttonEdit.addEventListener("click", function () {
+  const currentData = userInfoData.getUserInfo();
+  nameInput.value = currentData.name;
+  jobInput.value = currentData.job;
 
-  // Активация кнопки Сабмита
-  formProfile.enableButton();
+  popupFormProfile.open();
 
-  // Вызов метода очищения поля ошибок
-  formProfile.resetErrors();
-
-  // Присвоение первичных значений (со страницы) в поля открытой формы
-  handleProfile();
-
-
+  formValidatorAddName.deleteMistakes();
+});
+// попап добавления карточки
+buttonAdd.addEventListener("click", function () {
+  formAddCards.reset();
+  formValidatorAddCards.deleteMistakes();
+  popupFormCard.open();
+});
+// попап добавления аватара
+buttonEditAvatar.addEventListener("click", function () {
+  formValidatorAddAvatar.deleteMistakes();
+  popupFormAvatar.open();
 });
 
-// Первичные значения в профиле формы
-function handleProfile() {
-
-  // Вызов у нового элемента класса UserInfo  метода возврата объекта с данными пользователя
-  const userData = newUser.getUserInfo();
-
-  // Подставляем имя
-  nameInput.value = userData.name;
-
-  // Подставляем работу (информацию о пользователя)
-  jobInput.value = userData.job;
-};
-
-// Заполнение формы попапа Профиля новыми данными, вводимыми пользователем
-// Код по новой теории
-const handleProfileFormSubmit = (formData) => {
-  // Вызов у нового пользователя метода подстановки значений данных из формированных полей формы в formData
-  newUser.setUserInfo(formData);
-
-  // Закрыть попап формы Профиля
-  popupEditProfile.close();
-};
-
-// Создание нового элемента Попап-Профиля из класса PWF
-const popupEditProfile = new PopupWithForm('.popup_edit-profile', handleProfileFormSubmit);
-popupEditProfile.setEventListeners();
-
-// ФУНКЦИОНАЛ ОТКРЫТИЯ ПОПАПА ДЛЯ ДОБАВЛЕНИЯ НОВОЙ КАРТОЧКИ НА СТРАНИЦУ
-
-// Слушатель действий: сбросить форму, открыть попап Места, блокировка кнопки
-buttonAddOpen.addEventListener('click', function () {
-
-  // Сброс полей формы Попапа добавления карточек
-  formAddCard.reset();
-
-  // Открытие Попапа добавления карточки
-  popupPlace.open();
-
-  // Вызов метода переключения кнопки
-  formCard.resetValidation();
-
-  // Вызов метода очищения поля ошибок
-  formCard.resetErrors();
-});
-
-// Функция - обработчик событий по добавлению новой карточки 
-function handleAddCardFormSubmit(data) {
-
-  const cardElement = createCard(data.name, data.link); //присваиваем новой карточке значения из полей формы
-
-  addCard(cardElement);
-
-  popupPlace.close();
-};
-
-
-// Объявление нового элемента класса
-const popupPlace = new PopupWithForm('.popup_place', handleAddCardFormSubmit);
-popupPlace.setEventListeners();
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([res, items]) => {
+    userInfoData.setUserInfo(res);
+    userInfoData.setUserAvatar(res);
+    currentUserId = res._id;
+    cardsList.renderItems(items, res._id);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

@@ -1,44 +1,45 @@
-export class Popup {
-  constructor(selectorPopup) {
-    this._popup = document.querySelector(selectorPopup);
+export default class Popup {
+  constructor(popupSelector, buttonClose) {
+    this._popup = popupSelector;
+    this._closeButton = buttonClose;
+    this._saveButton = this._popup.querySelector('.popup__button-save');
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._overlayClose = this._overlayClose.bind(this);
-    this._closeButton = this._popup.querySelector('.popup__close-button');
   }
 
-
-  // Приватный метод закрытия попапа по Esc
   _handleEscClose(evt) {
-    if (evt.key === 'Escape') {
-      this.close();
-    }
+    if (evt.key === "Escape") this.close();
   }
 
-  // Приватный метод закрытия попапа по Оверлею
-  _overlayClose(evt) {
-    if (evt.target === evt.currentTarget) {
-      this.close();
-    }
-  }
-
-
-  // Метод открытия попапа
-  open() {
-    this._popup.classList.add('popup_opened');
-    document.addEventListener('keydown', this._handleEscClose);
-    this._popup.addEventListener('mousedown', this._overlayClose);
-  }
-
-  // Метод закрытия попапа
-  close() {
-    this._popup.classList.remove('popup_opened');
-    document.removeEventListener('keydown', this._handleEscClose);
-    this._popup.removeEventListener('mousedown', this._overlayClose);
+  _handleOverlayClose(evt) {
+    if (evt.target === evt.currentTarget) this.close();
   }
 
   setEventListeners() {
-    this._closeButton.addEventListener('click', () => {
+    this._closeButton.addEventListener("click", () => {
       this.close();
-    })
+    });
+
+    this._popup.addEventListener("click", (evt) => {
+      this._handleOverlayClose(evt);
+    });
   }
+
+  open() {
+    document.addEventListener("keydown", this._handleEscClose);
+    this._popup.classList.add("popup_opened");
+  }
+
+  close() {
+    this._popup.classList.remove("popup_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
+  }
+
+  addSaving() {
+    this._saveButton.textContent = 'Сохранение...';
+  }
+
+  deleteSaving(saveButtonTitle) {
+    this._saveButton.textContent = saveButtonTitle;
+  }
+
 }
