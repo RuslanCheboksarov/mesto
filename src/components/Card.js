@@ -71,16 +71,16 @@ export default class Card {
     );
 
     if (this._isLiked) {
-      this._likeButton.classList.remove("cards__button_type_like-active");
       this._removeLike(this._data, (newLikes) => {
         console.log("Работаю removeLike", { newLikes });
+        this._likeButton.classList.remove("cards__button_type_like-active");
         this._data.likes = newLikes;
         this._likeCount.textContent = this._data.likes.length;
       });
     } else {
-      this._likeButton.classList.add("cards__button_type_like-active");
       this._onLike(this._data, (newLikes) => {
         console.log("Работаю onLike", { newLikes });
+        this._likeButton.classList.add("cards__button_type_like-active");
         this._data.likes = newLikes;
         this._likeCount.textContent = this._data.likes.length;
       });

@@ -2,6 +2,13 @@ export default class FormValidator {
   constructor(config, formElement) {
     this._config = config;
     this._formElement = formElement;
+    this._inputList = Array.from(
+      this._formElement.querySelectorAll(this._config.inputSelector)
+    );
+
+    this._buttonElement = this._formElement.querySelector(
+      this._config.submitButtonSelector
+    );
   }
 
   //Публичный метод валидации
@@ -11,13 +18,7 @@ export default class FormValidator {
 
   // Слушатель событий
   _setEventListeners() {
-    this._inputList = Array.from(
-      this._formElement.querySelectorAll(this._config.inputSelector)
-    );
 
-    this._buttonElement = this._formElement.querySelector(
-      this._config.submitButtonSelector
-    );
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
